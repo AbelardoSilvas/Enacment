@@ -1,14 +1,43 @@
 <div class="container">
   <mat-card>
-    <p>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo" />
-    </p>
     <mat-card-content>
-      <mat-card-title translate>Hello world !</mat-card-title>
-      <mat-card-subtitle>
-        <app-loader [isLoading]="isLoading" [size]="1.5"></app-loader>
-        <q [hidden]="isLoading">{{ quote }}</q>
-      </mat-card-subtitle>
+      <mat-card-title translate>Calculadora de multiplos de 3, 5 y 7!</mat-card-title>
+      <br />
+      <form [formGroup]="multiplesForm" (submit)="calculateHandler()">
+        <div class="form-flex">
+          <mat-form-field appearance="outline" class="control">
+            <mat-label translate>Introduce un número</mat-label>
+            <input type="number" matInput formControlName="number" placeholder="0000" min="1" appOnlyNumbers />
+            <mat-error *ngIf="!fc['number'].hasError('required') && fc['number'].errors"
+              >El Número debe ser mayor de 0</mat-error
+            >
+            <mat-error *ngIf="fc['number'].hasError('required')"> El número es <strong>requiredo</strong> </mat-error>
+          </mat-form-field>
+          <div class="btn">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!multiplesForm.valid">Calcular</button>
+          </div>
+        </div>
+      </form>
+      <br />
+      <br />
+      <mat-card-title *ngIf="(multiplesResult | keyvalue)?.length">
+        Los multiplos de 3, 5 y 7 del 0 a
+        {{ fc['number'].value }} son:</mat-card-title
+      >
+      <mat-list role="list">
+        <mat-list-item
+          [ngClass]="calculateClass(multiple)"
+          role="listitem"
+          *ngFor="let multiple of multiplesResult | keyvalue: originalOrderer"
+          >{{ multiple.key }}
+          <div *ngIf="multiple.value.length > 1">
+            &nbsp; [
+            <span *ngFor="let value of multiple.value; let i = index; let l = count; let last = last">
+              {{ value.of }}{{ i < l - 2 ? ',' : i === l || last ? '' : ' y&nbsp;' }} </span
+            >]
+          </div></mat-list-item
+        >
+      </mat-list>
     </mat-card-content>
   </mat-card>
 </div>

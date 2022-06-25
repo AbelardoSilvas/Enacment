@@ -12,4 +12,12 @@ export const environment = {
   serverUrl: 'https://api.chucknorris.io',
   defaultLanguage: 'es-ES',
   supportedLanguages: ['es-ES'],
+  firebaseConfig: {
+    apiKey: 'AIzaSyC5uyprMWopsiLhdZ21ULJ6rim-EOF3bjM',
+    authDomain: 'enacment-cf2fb.firebaseapp.com',
+    projectId: 'enacment-cf2fb',
+    storageBucket: 'enacment-cf2fb.appspot.com',
+    messagingSenderId: '732615924922',
+    appId: '1:732615924922:web:92f64364a75a6757e4f683',
+  },
 };
